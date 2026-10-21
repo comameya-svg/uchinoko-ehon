@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>特定商取引法に基づく表記｜うちの子えほん</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Klee+One:wght@600&family=Zen+Kaku+Gothic+New:wght@400;700&display=swap">
+<style>
+:root{
+  --paper:#F3F6F4;--sheet:#FFFFFF;--ink:#24304A;--ink-soft:#56607A;--crimson:#C8373B;--line:#D9DFDA;
+  --f-display:"Klee One","Hiragino Maru Gothic ProN","Yu Gothic",serif;
+  --f-body:"Zen Kaku Gothic New","Hiragino Sans","Yu Gothic","Meiryo",sans-serif;
+}
+@media (prefers-color-scheme: dark){:root{--paper:#171C26;--sheet:#212836;--ink:#ECEFF5;--ink-soft:#AEB6C8;--crimson:#F06A6C;--line:#323B4D;color-scheme:dark}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--f-body);font-size:15px;line-height:1.9;letter-spacing:.02em}
+.wrap{max-width:860px;margin:0 auto;padding-left:max(20px,env(safe-area-inset-left,0px));padding-right:max(20px,env(safe-area-inset-right,0px))}
+header{padding-block:18px;display:flex;justify-content:space-between;align-items:center}
+header a{font-family:var(--f-display);font-weight:600;font-size:20px;color:var(--ink);text-decoration:none}
+main{padding-block:24px 64px}
+h1{font-family:var(--f-display);font-weight:600;font-size:clamp(22px,3.4vw,30px);margin:0 0 28px}
+dl{margin:0;background:var(--sheet);border-radius:16px;border:1px solid var(--line);overflow:hidden}
+.row{display:grid;grid-template-columns:200px 1fr;border-bottom:1px solid var(--line)}
+.row:last-child{border-bottom:0}
+dt,dd{margin:0;padding:16px 20px}
+dt{font-weight:700;background:color-mix(in srgb,var(--line) 35%,transparent)}
+dd{color:var(--ink-soft);min-width:0;overflow-wrap:anywhere}
+.fill{color:var(--crimson);font-weight:700}
+.back{display:inline-block;margin-top:28px;color:var(--ink)}
+footer{padding-block:28px;color:var(--ink-soft);font-size:13px;text-align:center}
+@media (max-width:640px){.row{grid-template-columns:1fr}dt{padding-bottom:6px}dd{padding-top:6px}}
+</style>
+</head>
+<body>
+<header class="wrap"><a href="./">うちの子えほん</a></header>
+<main class="wrap">
+  <h1>特定商取引法に基づく表記</h1>
+  <dl>
+    <div class="row"><dt>販売事業者</dt><dd><span class="fill">【要記入：氏名または屋号】</span></dd></div>
+    <div class="row"><dt>運営責任者</dt><dd><span class="fill">【要記入：氏名】</span></dd></div>
+    <div class="row"><dt>所在地</dt><dd><span class="fill">【要記入：住所、または「請求があった場合には遅滞なく開示いたします」】</span></dd></div>
+    <div class="row"><dt>電話番号</dt><dd><span class="fill">【要記入：電話番号、または「請求があった場合には遅滞なく開示いたします」】</span></dd></div>
+    <div class="row"><dt>メールアドレス</dt><dd><span class="fill">【要記入：お問い合わせ用メールアドレス】</span></dd></div>
+    <div class="row"><dt>販売価格</dt><dd>オーダーメイド絵本（表紙＋16ページ前後・PDF）1冊 9,800円<br>モニター価格 4,900円<br>修正は2回まで無料。3回目以降は1回3,000円（1回にまとめて送っていただいた修正を1回と数えます）</dd></div>
+    <div class="row"><dt>商品代金以外の必要料金</dt><dd>銀行振込の場合の振込手数料、インターネット接続にかかる通信料はお客さまのご負担となります。</dd></div>
+    <div class="row"><dt>支払方法</dt><dd>クレジットカード決済、銀行振込 <span class="fill">【要確認】</span></dd></div>
+    <div class="row"><dt>支払時期</dt><dd>ご相談のうえご注文が確定した時点で、お支払いの手続きをご案内します。お支払いの確認後に制作を開始します。</dd></div>
+    <div class="row"><dt>商品の引渡時期</dt><dd>お支払いの確認と、絵などの材料をお受け取りしてから2週間前後で、PDFをメールでお届けします。</dd></div>
+    <div class="row"><dt>返品・キャンセル</dt><dd>オーダーメイドの制作物のため、制作を始めたあとの返金はいたしかねます。制作開始前のキャンセルについては、お問い合わせください。</dd></div>
+    <div class="row"><dt>動作環境</dt><dd>PDFを閲覧できるパソコン、スマートフォン、タブレット</dd></div>
+  </dl>
+  <a class="back" href="./">← トップページへ戻る</a>
+</main>
+<footer>© うちの子えほん</footer>
+</body>
+</html>
