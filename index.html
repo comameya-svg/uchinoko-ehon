@@ -1,0 +1,413 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="お子さんが描いた絵から、世界に一冊だけの絵本をおつくりします。表紙＋16ページ前後・PDFでお届け。モニター価格4,900円。">
+<meta property="og:title" content="うちの子えほん">
+<meta property="og:description" content="あの子が描いたおともだちが、絵本の主人公になる。">
+<meta property="og:type" content="website">
+<meta property="og:image" content="https://comameya-svg.github.io/uchinoko-ehon/img/cover.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<style>body{margin:0}</style>
+<title>うちの子えほん</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Klee+One:wght@400;600&family=Zen+Kaku+Gothic+New:wght@400;500;700&family=Yomogi&display=swap">
+<style>
+/* Layout: スケッチブック → 絵本。左に「テープで貼った子どもの絵」、右に「できあがった絵本のページ」を並べる見開き構成 */
+:root{
+  --paper:#F3F6F4;        /* 画用紙（ほんのり緑寄りの白） */
+  --sheet:#FFFFFF;
+  --ink:#24304A;          /* 紺のクレヨン */
+  --ink-soft:#56607A;
+  --crimson:#C8373B;      /* 絵の赤 */
+  --ochre:#C58B2C;        /* 絵の黄土 */
+  --leaf:#3D8A55;         /* 絵の緑 */
+  --cobalt:#2F5DB0;       /* 絵の青 */
+  --line:#D9DFDA;
+  --tape:rgba(214,190,120,.55);
+  --shadow:0 10px 30px rgba(36,48,74,.12);
+  --f-display:"Klee One","Hiragino Maru Gothic ProN","Yu Gothic",serif;
+  --f-body:"Zen Kaku Gothic New","Hiragino Sans","Yu Gothic","Meiryo",sans-serif;
+  --f-hand:"Yomogi","Klee One","Yu Gothic",cursive;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --paper:#171C26;--sheet:#212836;--ink:#ECEFF5;--ink-soft:#AEB6C8;--crimson:#F06A6C;--ochre:#E2AE55;--leaf:#6CC488;--cobalt:#7FA6F0;--line:#323B4D;--tape:rgba(226,190,110,.35);--shadow:0 10px 30px rgba(0,0,0,.4);color-scheme:dark}}
+:root[data-theme="dark"]{--paper:#171C26;--sheet:#212836;--ink:#ECEFF5;--ink-soft:#AEB6C8;--crimson:#F06A6C;--ochre:#E2AE55;--leaf:#6CC488;--cobalt:#7FA6F0;--line:#323B4D;--tape:rgba(226,190,110,.35);--shadow:0 10px 30px rgba(0,0,0,.4);color-scheme:dark}
+
+*{box-sizing:border-box}
+body{background:var(--paper);color:var(--ink);font-family:var(--f-body);font-size:16px;line-height:1.9;letter-spacing:.02em;-webkit-font-smoothing:antialiased}
+img{display:block;max-width:100%;height:auto}
+a{color:inherit}
+.wrap{max-width:1120px;margin:0 auto;padding-left:max(20px,env(safe-area-inset-left,0px));padding-right:max(20px,env(safe-area-inset-right,0px))}
+section{padding-block:clamp(56px,9vw,112px);overflow-x:clip}
+h1,h2,h3{font-family:var(--f-display);font-weight:600;line-height:1.45;text-wrap:balance;margin:0}
+h2{font-size:clamp(26px,3.6vw,38px)}
+h3{font-size:20px}
+p{margin:0}
+.eyebrow{font-family:var(--f-hand);color:var(--crimson);font-size:18px;letter-spacing:.06em}
+.lead{color:var(--ink-soft);max-width:38em}
+.sec-head{display:grid;gap:14px;margin-bottom:clamp(32px,5vw,56px)}
+
+/* crayon underline */
+.crayon{background:linear-gradient(transparent 62%, color-mix(in srgb,var(--ochre) 45%,transparent) 62%, color-mix(in srgb,var(--ochre) 45%,transparent) 92%, transparent 92%);padding:0 .1em}
+
+/* buttons */
+.btn{display:inline-flex;align-items:center;gap:10px;font-family:var(--f-body);font-weight:700;font-size:17px;padding:16px 30px;border-radius:999px;background:var(--crimson);color:#fff;text-decoration:none;border:0;cursor:pointer;box-shadow:0 6px 0 color-mix(in srgb,var(--crimson) 60%,#000);transition:transform .15s, box-shadow .15s}
+.btn:hover{transform:translateY(2px);box-shadow:0 4px 0 color-mix(in srgb,var(--crimson) 60%,#000)}
+.btn:focus-visible{outline:3px solid var(--cobalt);outline-offset:4px}
+.btn-sub{font-size:13px;color:var(--ink-soft)}
+
+/* ===== hero ===== */
+.hero{padding-block:clamp(32px,6vw,72px) clamp(48px,7vw,88px)}
+.hero-grid{display:grid;grid-template-columns:1fr 1.15fr;gap:clamp(28px,5vw,64px);align-items:center}
+.hero h1{font-size:clamp(32px,5.2vw,56px);letter-spacing:.03em}
+.hero h1 .red{color:var(--crimson)}
+.hero-copy{display:grid;gap:22px;min-width:0}
+.hero-copy .lead{font-size:17px}
+.hero-cta{display:flex;flex-wrap:wrap;align-items:center;gap:14px 18px}
+.hero-art{position:relative;min-width:0}
+.hero-art .book{border-radius:6px 14px 14px 6px;box-shadow:var(--shadow),inset 8px 0 0 rgba(0,0,0,.08);transform:rotate(1.2deg);overflow:hidden;background:var(--sheet)}
+.hero-art .taped{position:absolute;width:38%;left:-6%;bottom:-12%;transform:rotate(-7deg)}
+.brand{display:flex;align-items:center;justify-content:space-between;padding-block:18px}
+.brand b{font-family:var(--f-display);font-size:20px}
+.brand a{font-size:14px;text-decoration:none;color:var(--ink-soft)}
+
+/* taped photo / drawing */
+.taped{background:var(--sheet);padding:10px 10px 12px;box-shadow:var(--shadow);position:relative}
+.taped::before,.taped::after{content:"";position:absolute;width:64px;height:22px;background:var(--tape);top:-10px}
+.taped::before{left:12%;transform:rotate(-6deg)}
+.taped::after{right:12%;transform:rotate(5deg)}
+.taped figcaption{font-family:var(--f-hand);font-size:14px;color:var(--ink-soft);padding-top:6px;text-align:center}
+
+/* ===== origin ===== */
+.origin{background:var(--sheet)}
+.origin-grid{display:grid;grid-template-columns:1fr 1fr;gap:clamp(28px,5vw,64px);align-items:center}
+.quote{font-family:var(--f-display);font-size:clamp(19px,2.2vw,23px);line-height:2.1;border-left:4px solid var(--leaf);padding:6px 0 6px 22px}
+.origin-text{display:grid;gap:20px;min-width:0}
+.origin figure{margin:0}
+.origin figure img{border-radius:10px;box-shadow:var(--shadow)}
+
+/* ===== sources ===== */
+.sources{display:grid;grid-template-columns:repeat(2,1fr);gap:20px;max-width:880px}
+.src{background:var(--sheet);border:1.5px dashed var(--line);border-radius:16px;padding:26px 24px;display:grid;gap:10px;align-content:start}
+.src .ic{font-family:var(--f-hand);font-size:30px;line-height:1}
+.src:nth-child(1) .ic{color:var(--cobalt)}
+.src:nth-child(2) .ic{color:var(--leaf)}
+.src:nth-child(3) .ic{color:var(--ochre)}
+.src p{color:var(--ink-soft);font-size:15px}
+
+/* ===== before → after ===== */
+.pairs{display:grid;gap:clamp(56px,8vw,96px)}
+.pair{display:grid;grid-template-columns:.8fr auto 1.3fr;gap:clamp(16px,3vw,36px);align-items:center}
+.pair:nth-child(even){grid-template-columns:1.3fr auto .8fr}
+.pair:nth-child(even) .from{order:3}
+.pair:nth-child(even) .arrow{order:2;transform:scaleX(-1)}
+.pair:nth-child(even) .to{order:1}
+.from{margin:0;min-width:0}
+.from.taped{transform:rotate(-2.5deg)}
+.pair:nth-child(even) .from.taped{transform:rotate(2deg)}
+.arrow{font-family:var(--f-hand);font-size:44px;color:var(--crimson);line-height:1}
+.to{margin:0;display:grid;gap:14px;min-width:0}
+.to img{border-radius:8px;box-shadow:var(--shadow)}
+.to h3{display:flex;gap:10px;align-items:baseline;flex-wrap:wrap}
+.tag{font-family:var(--f-body);font-size:12px;font-weight:700;letter-spacing:.08em;padding:3px 10px;border-radius:999px;background:color-mix(in srgb,var(--leaf) 16%,transparent);color:var(--leaf)}
+.to p{color:var(--ink-soft);font-size:15px}
+.booktext{font-family:var(--f-display);font-size:15px;color:var(--ink);background:color-mix(in srgb,var(--ochre) 10%,var(--sheet));border-radius:8px;padding:12px 16px;line-height:2}
+
+/* ===== gallery ===== */
+.gallery-sec{background:var(--sheet);overflow:hidden}
+.strip{display:flex;gap:18px;overflow-x:auto;scroll-snap-type:x mandatory;padding:6px 2px 22px;scrollbar-width:thin}
+.strip figure{flex:0 0 min(78%,440px);scroll-snap-align:start;margin:0;display:grid;gap:8px}
+.strip img{border-radius:8px;box-shadow:0 4px 14px rgba(36,48,74,.12)}
+.strip figcaption{font-family:var(--f-display);font-size:14px;color:var(--ink-soft);font-variant-numeric:tabular-nums}
+.strip figcaption b{color:var(--crimson);font-weight:600;margin-right:8px}
+.hint{font-family:var(--f-hand);color:var(--ink-soft);font-size:15px}
+
+/* ===== points ===== */
+.points{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(20px,3vw,40px)}
+.point{display:grid;gap:12px;align-content:start}
+.point .mark{width:44px;height:44px;border-radius:50%;display:grid;place-items:center;font-family:var(--f-hand);font-size:22px;color:#fff}
+.point:nth-child(1) .mark{background:var(--cobalt)}
+.point:nth-child(2) .mark{background:var(--leaf)}
+.point:nth-child(3) .mark{background:var(--ochre)}
+.point p{color:var(--ink-soft);font-size:15px}
+
+/* ===== flow ===== */
+.flow{list-style:none;margin:0;padding:0;display:grid;gap:0;counter-reset:s;max-width:760px}
+.flow li{display:grid;grid-template-columns:56px 1fr;gap:18px;padding-bottom:28px;position:relative}
+.flow li::before{counter-increment:s;content:counter(s);width:44px;height:44px;border-radius:50%;border:2px solid var(--ink);display:grid;place-items:center;font-family:var(--f-display);font-weight:600;background:var(--paper);position:relative;z-index:1}
+.flow li::after{content:"";position:absolute;left:21px;top:44px;bottom:0;border-left:2px dashed var(--line)}
+.flow li:last-child::after{display:none}
+.flow h3{font-size:18px;margin-bottom:4px}
+.flow p{color:var(--ink-soft);font-size:15px}
+
+/* ===== spec ===== */
+.spec-sec{background:var(--sheet)}
+.spec{display:grid;grid-template-columns:1.2fr 1fr;gap:clamp(24px,4vw,56px);align-items:start}
+.spec dl{margin:0;display:grid;grid-template-columns:auto 1fr;border-top:1px solid var(--line)}
+.spec dt,.spec dd{margin:0;padding:14px 0;border-bottom:1px solid var(--line)}
+.spec dt{font-weight:700;padding-right:28px;white-space:nowrap}
+.spec dd{color:var(--ink-soft)}
+.price{border:2px solid var(--ink);border-radius:18px;padding:28px;display:grid;gap:12px;background:var(--paper)}
+.price .amount{font-family:var(--f-display);font-size:48px;font-weight:600;line-height:1.2;color:var(--crimson);font-variant-numeric:tabular-nums}
+.price .amount small{font-size:22px;margin-left:4px}
+.price .regular{color:var(--ink-soft);font-size:15px}
+.price .regular s{text-decoration-thickness:2px;text-decoration-color:var(--crimson)}
+.monitor-badge{justify-self:start;font-weight:700;font-size:13px;letter-spacing:.08em;color:#fff;background:var(--crimson);border-radius:999px;padding:4px 14px}
+.todo{display:inline-block;font-size:12px;font-weight:700;color:var(--crimson);border:1.5px solid var(--crimson);border-radius:6px;padding:1px 8px;margin-left:6px;vertical-align:middle;letter-spacing:.05em}
+
+/* ===== faq ===== */
+.faq{display:grid;gap:12px;max-width:820px}
+.faq details{background:var(--sheet);border-radius:14px;padding:18px 22px;border:1px solid var(--line)}
+.faq summary{cursor:pointer;font-weight:700;list-style:none;display:flex;gap:12px}
+.faq summary::before{content:"Q";font-family:var(--f-hand);color:var(--crimson);font-size:20px;line-height:1.5}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary:focus-visible{outline:2px solid var(--cobalt);outline-offset:4px;border-radius:4px}
+.faq details p{color:var(--ink-soft);font-size:15px;padding:10px 0 0 30px}
+
+/* ===== final cta ===== */
+.final{text-align:center}
+.final .inner{display:grid;gap:22px;justify-items:center;background:var(--sheet);border-radius:28px;padding:clamp(36px,6vw,64px) clamp(20px,4vw,48px);box-shadow:var(--shadow);position:relative;overflow:hidden}
+.final img.deco{width:min(280px,60%);border-radius:8px}
+.final .lead{margin:0 auto}
+footer{padding-block:36px;color:var(--ink-soft);font-size:13px;text-align:center}
+
+@media (max-width:820px){
+  .hero-art .taped{left:2%!important}
+  .hero-grid,.origin-grid,.spec{grid-template-columns:1fr}
+  .hero-art{order:-1;margin-bottom:24px}
+  .hero-art .taped{width:42%;left:-2%;bottom:-16%}
+  .sources,.points{grid-template-columns:1fr}
+  .pair,.pair:nth-child(even){grid-template-columns:1fr}
+  .pair .from,.pair:nth-child(even) .from{order:1;max-width:78%;justify-self:center}
+  .pair .arrow,.pair:nth-child(even) .arrow{order:2;justify-self:center;transform:rotate(90deg)}
+  .pair .to,.pair:nth-child(even) .to{order:3}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+</head>
+<body>
+
+
+<header class="wrap brand">
+  <b>うちの子えほん</b>
+  <a href="#apply">お申し込みについて</a>
+</header>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="wrap hero-grid">
+    <div class="hero-copy">
+      <p class="eyebrow">お子さんの絵から、物語が生まれる</p>
+      <h1>あの子が描いた<span class="red">おともだち</span>が、<br>絵本の主人公になる。</h1>
+      <p class="lead">お子さんが描いた顔、まる、ぐるぐるの線。その一枚一枚に役と名前をあたえて、家族の毎日のできごとと合わせて、世界に一冊だけの物語をおつくりします。絵の線や色は、お子さんが描いたまま残します。</p>
+      <div class="hero-cta">
+        <a class="btn" href="#apply">絵本づくりを相談する</a>
+        <span class="btn-sub">モニター価格 <b style="color:var(--crimson)">4,900円</b>（通常 <s>9,800円</s>）／PDFでお届け</span>
+      </div>
+    </div>
+    <div class="hero-art">
+      <div class="book"><img src="img/cover.jpg" alt="絵本『おやさいさんの ながい たび』の表紙。子どもが描いた顔のキャラクターたちが畑の道に並んでいる" width="1400" height="933"></div>
+      <figure class="taped"><img src="img/drawing2.jpg" alt="子どもがお絵かきボードに描いた、たまご形の顔の絵" width="872" height="594"><figcaption>もとの絵</figcaption></figure>
+    </div>
+  </div>
+</section>
+
+<!-- ORIGIN -->
+<section class="origin">
+  <div class="wrap origin-grid">
+    <div class="origin-text">
+      <p class="eyebrow">制作事例『おやさいさんの ながい たび』</p>
+      <h2>はじまりは、<br>ある朝のスープの話でした。</h2>
+      <p class="quote">スープに入っているおやさいさんは、ふるさとのおともだちとはなればなれになって、お皿にやって来たのに。食べられないで、ゴミ箱にバイバイされたら、どんな気持ちかな。</p>
+      <p class="lead">朝ごはんで交わしたこの会話を、絵本にしたい。そんなご相談から生まれた一冊です。食べものが食卓に届くまでには、たくさんの人の気持ちと手間が入っている。それを子どもがなんとなく感じられるお話に仕上げました。</p>
+    </div>
+    <figure><img src="img/p11.jpg" alt="絵本の一場面。お皿のふちで、おやさいさんがしょんぼりしている" width="1200" height="800"></figure>
+  </div>
+</section>
+
+<!-- SOURCES -->
+<section>
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="eyebrow">用意していただくもの</p>
+      <h2>材料は、お子さんの絵と<br>家族のエピソードだけ。</h2>
+    </div>
+    <div class="sources">
+      <div class="src"><span class="ic">え</span><h3>お子さんの絵</h3><p>お絵かきボード、クレヨン、落書き帳。スマホで撮った写真で大丈夫です。今回の事例では5枚の絵から登場人物をつくりました。</p></div>
+      <div class="src"><span class="ic">ことば</span><h3>家族のエピソード</h3><p>最近の会話、伝えたい気持ち、苦手な食べもの。箇条書きのメモでかまいません。お話はこちらで組み立てます。</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- BEFORE AFTER -->
+<section style="padding-top:0">
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="eyebrow">この材料が、こうなります</p>
+      <h2>描いた絵が、<span class="crayon">そのまま</span>物語の登場人物になる。</h2>
+    </div>
+    <div class="pairs">
+      <div class="pair">
+        <figure class="from taped"><img src="img/drawing2.jpg" alt="お絵かきボードに描かれた、たまご形の顔" width="872" height="594" loading="lazy"><figcaption>お絵かきボードの顔</figcaption></figure>
+        <span class="arrow" aria-hidden="true">→</span>
+        <figure class="to"><img src="img/p04.jpg" alt="畑から引き抜かれる、たまご形の顔のおやさいさん" width="1200" height="800" loading="lazy">
+          <h3>主人公の「おやさいさん」に <span class="tag">しゅじんこう</span></h3>
+          <p>目の位置、赤い口、横にのびた線まで、描いたとおりの顔で畑から旅に出ます。</p>
+          <p class="booktext">あるひ、「ようし、おいしく できたぞ！」<br>すぽーん！</p>
+        </figure>
+      </div>
+      <div class="pair">
+        <figure class="from taped"><img src="img/drawing4.jpg" alt="ペンで描かれた家族4人の絵" width="900" height="675" loading="lazy"><figcaption>ペンで描いた家族</figcaption></figure>
+        <span class="arrow" aria-hidden="true">→</span>
+        <figure class="to"><img src="img/p08.jpg" alt="ペン描きの線のままのパパとママが、スープの鍋をのぞいている" width="1200" height="800" loading="lazy">
+          <h3>パパとママも、その線のまま <span class="tag">かぞく</span></h3>
+          <p>ひげのつぶつぶ、ツンツンの髪。お子さんが描いた家族が、台所でスープをつくります。</p>
+          <p class="booktext">とんとん ことこと。<br>あったかい スープを つくりました。</p>
+        </figure>
+      </div>
+      <div class="pair">
+        <figure class="from taped"><img src="img/drawing5.jpg" alt="いろいろな色の顔がたくさん描かれた絵" width="900" height="675" loading="lazy"><figcaption>たくさんの顔の絵</figcaption></figure>
+        <span class="arrow" aria-hidden="true">→</span>
+        <figure class="to"><img src="img/p01.jpg" alt="畑の土から顔を出す、色とりどりのおやさいさんたち" width="1200" height="800" loading="lazy">
+          <h3>はたけの「おともだち」に <span class="tag">なかま</span></h3>
+          <p>ほかの絵に描かれた顔たちは、ふるさとの畑でいっしょに育った仲間になりました。</p>
+          <p class="booktext">とおい いなかの はたけで、<br>おやさいさんたちは うまれました。</p>
+        </figure>
+      </div>
+      <div class="pair">
+        <figure class="from taped"><img src="img/drawing1.jpg" alt="茶色と青の線で描かれた、花のそばの顔" width="900" height="630" loading="lazy"><figcaption>花と顔の絵</figcaption></figure>
+        <span class="arrow" aria-hidden="true">→</span>
+        <figure class="to"><img src="img/p05.jpg" alt="夕焼けの畑で、旅立つおやさいさんに手をふる仲間たち" width="1200" height="800" loading="lazy">
+          <h3>一枚の絵が、お別れの場面に <span class="tag">ものがたり</span></h3>
+          <p>ばらばらに描かれた絵どうしが、ひとつのお話の中で出会い、別れ、また思い出されます。絵に「気持ち」が生まれる瞬間です。</p>
+          <p class="booktext">「みんな、バイバイ」<br>ふるさとの おともだちと はなればなれ。</p>
+        </figure>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- GALLERY -->
+<section class="gallery-sec" id="pages">
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="eyebrow">絵本のなかみ</p>
+      <h2>畑から食卓までの、ながい旅。</h2>
+      <p class="lead">おひさま、雨、畑のおじいちゃんとおばあちゃん、トラックの運転手さん、お店の人、ママ。たくさんの「おいしく なあれ」をのせて、おやさいさんはお皿にやってきます。</p>
+    </div>
+    <div class="strip" tabindex="0" aria-label="絵本のページ一覧（横にスクロールできます）">
+      <figure><img src="img/p01.jpg" alt="畑のおやさいさんたち" width="1200" height="800" loading="lazy"><figcaption><b>2</b>はたけで うまれました</figcaption></figure>
+      <figure><img src="img/p02.jpg" alt="おひさまと雨" width="1200" height="800" loading="lazy"><figcaption><b>3</b>「おおきく なあれ」</figcaption></figure>
+      <figure><img src="img/p03.jpg" alt="畑のおじいちゃんとおばあちゃん" width="1200" height="800" loading="lazy"><figcaption><b>4</b>「おいしく なあれ」</figcaption></figure>
+      <figure><img src="img/p05.jpg" alt="夕焼けの中でお別れ" width="1200" height="800" loading="lazy"><figcaption><b>6</b>「みんな、バイバイ」</figcaption></figure>
+      <figure><img src="img/p06.jpg" alt="夜のトラック" width="1200" height="800" loading="lazy"><figcaption><b>7</b>トラックに ゆられて ごとごと</figcaption></figure>
+      <figure><img src="img/p07.jpg" alt="八百屋さん" width="1200" height="800" loading="lazy"><figcaption><b>8</b>ママが かって くれました</figcaption></figure>
+      <figure><img src="img/p09.jpg" alt="スープが届いた食卓" width="1200" height="800" loading="lazy"><figcaption><b>10</b>「ふたりは たべて くれるかな」</figcaption></figure>
+      <figure><img src="img/p10.jpg" alt="おやさいをよける場面" width="1200" height="800" loading="lazy"><figcaption><b>11</b>「おやさい、きらーい」</figcaption></figure>
+      <figure><img src="img/p12.jpg" alt="パパがスープの声を聞くしぐさ" width="1200" height="800" loading="lazy"><figcaption><b>13</b>「たべてーって いってるよ」</figcaption></figure>
+      <figure><img src="img/p13.jpg" alt="湯気の中に、関わった人たちが浮かぶ" width="1200" height="800" loading="lazy"><figcaption><b>14</b>たくさんの「おいしく なあれ」</figcaption></figure>
+      <figure><img src="img/p14.jpg" alt="おいしそうに食べる姉妹" width="1200" height="800" loading="lazy"><figcaption><b>15</b>「……あまーい！」</figcaption></figure>
+      <figure><img src="img/p16.jpg" alt="ハートの中の家族と、まわりのおやさいさん" width="1200" height="800" loading="lazy"><figcaption><b>17</b>みんな みんな たいせつなんだよ</figcaption></figure>
+    </div>
+    <p class="hint">← 横にスクロールして、ページをめくってみてください →</p>
+  </div>
+</section>
+
+<!-- POINTS -->
+<section>
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="eyebrow">大切にしていること</p>
+      <h2>「うちの子の絵だ」と、すぐわかる絵本に。</h2>
+    </div>
+    <div class="points">
+      <div class="point"><span class="mark">1</span><h3>絵を描きかえません</h3><p>上手に描き直すのではなく、お子さんの線・形・色をそのまま使います。意味づけのために別のキャラクターに置きかえることもしません。</p></div>
+      <div class="point"><span class="mark">2</span><h3>お話はご家族といっしょに</h3><p>誰が主人公か、どんな気持ちを伝えたいか。見本ページを見ながら相談して決めます。今回の事例も、ご家族とやりとりを重ねて文章を整えました。</p></div>
+      <div class="point"><span class="mark">3</span><h3>文字はあとから入れます</h3><p>本文は絵とは別に組むので、言いまわしの修正は絵を描き直さずにできます。ひらがな中心の、読み聞かせしやすい文字です。</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- FLOW -->
+<section style="padding-top:0">
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="eyebrow">できあがるまで</p>
+      <h2>お申し込みから完成までの流れ</h2>
+    </div>
+    <ol class="flow">
+      <li><div><h3>お申し込み・ご相談</h3><p>どんな絵本にしたいか、ざっくり教えてください。</p></div></li>
+      <li><div><h3>材料を送る</h3><p>お子さんの絵（撮影した画像）と、伝えたいエピソードを送っていただきます。</p></div></li>
+      <li><div><h3>キャラクターとお話の案</h3><p>絵をきれいに清書したキャラクター表と、ページごとの文章案をお送りします。</p></div></li>
+      <li><div><h3>見本ページの確認</h3><p>表紙と数ページを先に仕上げて、絵のタッチや文字の入れ方を確認していただきます。</p></div></li>
+      <li><div><h3>全ページ制作・修正</h3><p>残りのページを仕上げます。文章や場面の修正もここで反映します。</p></div></li>
+      <li><div><h3>完成・お届け</h3><p>完成した絵本をPDFでお届けします。</p></div></li>
+    </ol>
+  </div>
+</section>
+
+<!-- SPEC / PRICE -->
+<section class="spec-sec">
+  <div class="wrap spec">
+    <div>
+      <div class="sec-head">
+        <p class="eyebrow">仕様</p>
+        <h2>おつくりする絵本</h2>
+      </div>
+      <dl>
+        <dt>ページ数</dt><dd>表紙＋16ページ前後（お話に合わせて増減できます）</dd>
+        <dt>判型</dt><dd>横長（絵の下に本文が入る形）</dd>
+        <dt>お届け形式</dt><dd>PDF</dd>
+        <dt>本文</dt><dd>ひらがな中心・教科書体の読みやすい文字</dd>
+        <dt>制作期間</dt><dd>2週間前後</dd>
+      </dl>
+    </div>
+    <div class="price">
+      <p class="eyebrow" style="font-size:16px">料金</p>
+      <p class="monitor-badge">モニター価格・半額</p>
+      <p class="regular">通常価格 <s>9,800円</s></p>
+      <p class="amount">4,900<small>円</small></p>
+      <p class="lead" style="font-size:14px">表紙＋16ページ前後の絵本（PDF）1冊分です。モニター価格は、完成後にご感想をいただける方が対象です。</p>
+      <a class="btn" href="#apply" style="justify-self:start">まずは相談する</a>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section>
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="eyebrow">よくある質問</p>
+      <h2>気になること</h2>
+    </div>
+    <div class="faq">
+      <details><summary>どんな絵でも物語になりますか？</summary><p>顔だけ、まるだけ、ぐるぐるの線だけでも大丈夫です。今回の事例も、お絵かきボードに描いた顔や線から主人公と仲間たちが生まれました。</p></details>
+      <details><summary>絵は何枚あればいいですか？</summary><p>1枚からでもご相談いただけます。今回の事例では、主人公と仲間たち、家族の絵の合わせて5枚を使いました。枚数が多いほど登場人物を増やせます。</p></details>
+      <details><summary>お話を考えるのが苦手です。</summary><p>エピソードのメモをいただければ、こちらでお話を組み立てます。いただいた言葉はできるだけそのまま生かします。</p></details>
+      <details><summary>できあがってから直せますか？</summary><p>文章は絵と別に入れているので、言いまわしの修正はすぐに反映できます。場面そのものを変える場合は、そのページの絵を描き直します。修正は2回まで無料で承ります。3回目以降は1回3,000円です。1回にまとめて送っていただいた修正を1回と数えます。</p></details>
+      <details><summary>紙の絵本にできますか？</summary><p>現在はPDFでのお届けです。印刷・製本のご希望はご相談ください。</p></details>
+    </div>
+  </div>
+</section>
+
+<!-- FINAL CTA -->
+<section class="final" id="apply">
+  <div class="wrap">
+    <div class="inner">
+      <img class="deco" src="img/sheet02.jpg" alt="清書した主人公のキャラクター" width="900" height="600" loading="lazy">
+      <p class="eyebrow">お申し込み</p>
+      <h2>冷蔵庫に貼ってあるあの絵を、<br>一冊の絵本にしませんか。</h2>
+      <p class="lead">いまなら、モニター価格 <b style="color:var(--crimson)">4,900円</b>（通常 <s>9,800円</s>）。<br>「こんな絵でも大丈夫？」というご相談からどうぞ。</p>
+      <a class="btn" href="https://docs.google.com/forms/d/e/1FAIpQLSdiZKqlFCq134q9SanjQ9ZKNMesHajBYby3XIVm0Kx3_oSfLw/viewform" target="_blank" rel="noopener">お申し込みフォームへ</a>
+      <p class="btn-sub">Googleフォームが開きます（約3分・ログイン不要）</p>
+    </div>
+  </div>
+</section>
+
+<footer class="wrap">© うちの子えほん　掲載している絵本は、ご家族の了承を得た制作事例です。</footer>
+
+</body>
+</html>
