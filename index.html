@@ -176,6 +176,14 @@ p{margin:0}
 .price .amount small{font-size:22px;margin-left:4px}
 .price .regular{color:var(--ink-soft);font-size:15px}
 .price .regular s{text-decoration-thickness:2px;text-decoration-color:var(--crimson)}
+.line-box{display:flex;gap:22px;align-items:center;justify-content:center;flex-wrap:wrap;margin-top:8px;padding-top:22px;border-top:1px dashed var(--line);text-align:left}
+.line-box img{width:140px;height:140px;border-radius:10px;background:#fff;padding:6px}
+.line-text{display:grid;gap:8px;min-width:0}
+.line-text p{margin:0;color:var(--ink-soft);font-size:14px}
+.line-text b{color:var(--ink);font-size:16px}
+.btn-line{background:#06C755;box-shadow:0 6px 0 #04913e;justify-self:start;font-size:16px;padding:12px 24px}
+.btn-line:hover{box-shadow:0 4px 0 #04913e}
+@media (max-width:640px){.line-box img{display:none}.line-text{justify-items:center;text-align:center}.btn-line{justify-self:center}}
 .monitor-terms{background:var(--sheet);border-radius:12px;padding:16px 18px;display:grid;gap:8px;font-size:14px}
 .monitor-terms .mt-title{font-weight:700}
 .monitor-terms ol{margin:0;padding-left:1.4em;display:grid;gap:4px}
@@ -442,7 +450,7 @@ footer{padding-block:36px;color:var(--ink-soft);font-size:13px;text-align:center
       <h2>気になること</h2>
     </div>
     <div class="faq">
-      <details><summary>相談はどのような方法で行いますか？</summary><p>ご相談は、メールまたはLINEでのやりとりを基本としています。ご都合のよい時間に、気軽にメッセージをお送りください。顔を見ながら話したい方は、Zoomでの打ち合わせも可能ですので、別途ご相談ください。</p></details>
+      <details><summary>相談はどのような方法で行いますか？</summary><p>ご相談は、メールまたはLINEでのやりとりを基本としています。ご都合のよい時間に、気軽にメッセージをお送りください。顔を見ながら話したい方は、Zoomでの打ち合わせも可能ですので、別途ご相談ください。<br>LINEでのご相談は、<a href="https://lin.ee/7cSXe2d" target="_blank" rel="noopener" onclick="gtag('event','line_click',{place:'faq'})">公式LINE</a>を友だち追加してメッセージをお送りください。</p></details>
       <details><summary>どんな絵でも物語になりますか？</summary><p>顔だけ、まるだけ、ぐるぐるの線だけでも大丈夫です。今回の事例も、お絵かきボードに描いた顔や線から主人公と仲間たちが生まれました。</p></details>
       <details><summary>絵は何枚あればいいですか？</summary><p>1枚からでもご相談いただけます。今回の事例では、主人公と仲間たち、家族の絵の合わせて5枚を使いました。枚数が多いほど登場人物を増やせます。</p></details>
       <details><summary>お話を考えるのが苦手です。</summary><p>エピソードのメモをいただければ、こちらでお話を組み立てます。いただいた言葉はできるだけそのまま生かします。</p></details>
@@ -463,6 +471,14 @@ footer{padding-block:36px;color:var(--ink-soft);font-size:13px;text-align:center
       <p class="lead">いまなら、<b style="color:var(--crimson)">限定10名</b>のモニター価格 <b style="color:var(--crimson)">4,900円</b>（通常 <s>9,800円</s>）。<br>「こんな絵でも大丈夫？」というご相談からどうぞ。</p>
       <a class="btn" href="https://docs.google.com/forms/d/e/1FAIpQLSdiZKqlFCq134q9SanjQ9ZKNMesHajBYby3XIVm0Kx3_oSfLw/viewform" target="_blank" rel="noopener" onclick="gtag('event','generate_lead',{form:'google_form'})">お申し込みフォームへ</a>
       <p class="btn-sub">Googleフォームが開きます（約3分・ログイン不要）</p>
+      <div class="line-box">
+        <img src="img/line_qr.png" alt="公式LINEの友だち追加用QRコード" width="160" height="160" loading="lazy">
+        <div class="line-text">
+          <p><b>LINEで相談したい方はこちら</b></p>
+          <p>公式LINEを友だち追加して、メッセージをお送りください。</p>
+          <a class="btn btn-line" href="https://lin.ee/7cSXe2d" target="_blank" rel="noopener" onclick="gtag('event','line_click',{place:'cta'})">LINEで相談する</a>
+        </div>
+      </div>
     </div>
   </div>
 </section>
